@@ -46,7 +46,7 @@ namespace GoMap {
 
 		[HideInInspector]
 		public float updateEvery = 1 / 1000f;
-
+		public int i=0;
 		public MotionPreset simulateMotion = MotionPreset.Walk;
 		float demo_WASDspeed = 20;
 
@@ -147,15 +147,18 @@ namespace GoMap {
 					yield return new WaitForSeconds(repeatTime);
 				}
 				else if (status == LocationServiceStatus.Failed) {
-					showBannerWithText (true, "GPS signal not found");
+					showBannerWithText (true, "GPS signal not found1");
+                    Input.location.Start();
 					yield return new WaitForSeconds(repeatTime);
 				}
 				else if (status == LocationServiceStatus.Stopped) {
-					showBannerWithText (true, "GPS signal not found");
+                                        Input.location.Start();
+					showBannerWithText (true, "GPS signal not found2");
 					yield return new WaitForSeconds(repeatTime);
 				}
 				else if (status == LocationServiceStatus.Initializing) {
-					showBannerWithText (true, "GPS signal not found");
+                    Input.location.Start();
+					showBannerWithText (true, "GPS signal not found" + i++);
 					yield return new WaitForSeconds(repeatTime);
 				} 
 				else if (status == LocationServiceStatus.Running) {
