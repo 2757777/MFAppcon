@@ -12,7 +12,7 @@ namespace GoMap
 	public class GOPlaces : MonoBehaviour {
 
 		public GOMap goMap;
-		public string baseUrl = "https://maps.googleapis.com/maps/api/place/radarsearch/json?";
+        public string baseUrl = "https://maps.googleapis.com/maps/api/place/search/json?";
 		public string type;
 		public string googleAPIkey;
 		public GameObject prefab;
@@ -38,7 +38,8 @@ namespace GoMap
 
 			if (lastQueryCenter == null || lastQueryCenter.DistanceFromPoint (currentLocation) >= queryRadius/1.5f) { //Do the request only if approaching the limit of the previous one
 				lastQueryCenter = currentLocation;
-				string url = baseUrl + "location="+currentLocation.latitude+","+currentLocation.longitude+"&radius="+queryRadius+"&type="+type+"&key="+googleAPIkey;
+                string url = baseUrl + "location=" + currentLocation.latitude + "," + currentLocation.longitude + "&radius=" + queryRadius + "&type=" + type + "&language=ja&sensor=false&key=" + googleAPIkey;
+               //string url = "https://maps.googleapis.com/maps/api/place/search/json?location=35.6814,139.7674&radius=3000&types=lodging&language=ja&sensor=false&key=" + googleAPIkey;
 				StartCoroutine (LoadPlaces(url));
 			}
 		}
@@ -81,10 +82,15 @@ namespace GoMap
 				go.transform.parent = transform;
 				go.name = (string)result["place_id"];
 
-			}
-
+                MarkData MD = go.GetComponent<MarkData>();
+                MD.MarkName = (string)result["name"];
+                var photos = (IList)result["photos"];
+                if (photos != null)
+                {
+                 var reference = (IDictionary)photos[0];
+                 MD.MarkPhoto = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + (string)reference["photo_reference"] + "&key=" + googleAPIkey;
+                }
+            }
 		}
-
-
 	}
 }
