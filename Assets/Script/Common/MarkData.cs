@@ -5,7 +5,7 @@ public class MarkData : MonoBehaviour {
 
     public string MarkName;
     public string MarkPhoto;
-
+    public float MarkRating;
 	// Use this for initialization
 	void Start () {
 	

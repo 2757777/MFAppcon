@@ -82,6 +82,7 @@ namespace GoMap {
 				go.transform.parent = transform;
 				go.name = (string)result["name"];
 
+                Debug.Log(result["rating"]);
 			}
 		}
 	}

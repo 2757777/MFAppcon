@@ -5,7 +5,7 @@ public class AnimatePrefab : MonoBehaviour {
 
 	public float speed = 500;
 	public bool continousRotation;
-	bool isAnimating;
+    public bool isAnimating;
 
 
 	void OnCollisionEnter(Collision collision) {

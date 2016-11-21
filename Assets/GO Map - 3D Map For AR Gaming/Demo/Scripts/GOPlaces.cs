@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Assets;
-
 //This class uses Google Places webservice API. 
 //It's made for demo purpose only, and needs your personal Google Developer API Key. 
 //(No credit card is required, visit https://developers.google.com/places/web-service/intro)
@@ -66,29 +65,36 @@ namespace GoMap
 			}
 
 
-			foreach (IDictionary result in results) { //This example only takes GPS location and the id of the object. There's lot more, take a look at the places API documentation
+            foreach (IDictionary result in results)
+            { //This example only takes GPS location and the id of the object. There's lot more, take a look at the places API documentation
 
-				IDictionary location = (IDictionary)((IDictionary)result ["geometry"])["location"];
-				double lat = (double)location ["lat"];
-				double lng = (double)location ["lng"];
+                IDictionary location = (IDictionary)((IDictionary)result["geometry"])["location"];
+                double lat = (double)location["lat"];
+                double lng = (double)location["lng"];
 
-	//			GameObject go = GameObject.Instantiate (prefab);
-	//			go.name = (string)result["place_id"];
-	//			goMap.dropPin (lat, lng, go);
+                //			GameObject go = GameObject.Instantiate (prefab);
+                //			go.name = (string)result["place_id"];
+                //			goMap.dropPin (lat, lng, go);
 
-				Coordinates coordinates = new Coordinates (lat, lng,0);
-				GameObject go = GameObject.Instantiate (prefab);
-				go.transform.localPosition = coordinates.convertCoordinateToVector(0);
-				go.transform.parent = transform;
-				go.name = (string)result["place_id"];
+                Coordinates coordinates = new Coordinates(lat, lng, 0);
+                GameObject go = GameObject.Instantiate(prefab);
+                go.transform.localPosition = coordinates.convertCoordinateToVector(0);
+                go.transform.parent = transform;
+                go.name = (string)result["place_id"];
 
                 MarkData MD = go.GetComponent<MarkData>();
                 MD.MarkName = (string)result["name"];
                 var photos = (IList)result["photos"];
+
                 if (photos != null)
                 {
-                 var reference = (IDictionary)photos[0];
-                 MD.MarkPhoto = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + (string)reference["photo_reference"] + "&key=" + googleAPIkey;
+                    var reference = (IDictionary)photos[0];
+                    MD.MarkPhoto = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + (string)reference["photo_reference"] + "&key=" + googleAPIkey;
+                }
+
+                if (result["rating"] != null)
+                {
+                    MD.MarkRating = Mathf.Round(float.Parse(result["rating"].ToString()));
                 }
             }
 		}
