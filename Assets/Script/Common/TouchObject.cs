@@ -33,7 +33,8 @@ public class TouchObject : MonoBehaviour {
 
     void OpenMarkDetail(GameObject TouchObj)
     {
-        MarkData MD = TouchObj.GetComponent<MarkData>();
+        MarkDetailCanvas.GetComponent<ShowMarkDetail>().MD = TouchObj.GetComponent<MarkData>();
+        MarkDetailCanvas.GetComponent<ShowMarkDetail>().SendMessage("RefreshData");
         MarkDetailCanvas.enabled = true;
     }
 }

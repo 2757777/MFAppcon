@@ -83,18 +83,25 @@ namespace GoMap
                 go.name = (string)result["place_id"];
 
                 MarkData MD = go.GetComponent<MarkData>();
+                //Name
                 MD.MarkName = (string)result["name"];
+                //CheckPhoto
                 var photos = (IList)result["photos"];
-
                 if (photos != null)
                 {
                     var reference = (IDictionary)photos[0];
                     MD.MarkPhoto = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + (string)reference["photo_reference"] + "&key=" + googleAPIkey;
                 }
-
+                //LoadRank
                 if (result["rating"] != null)
                 {
                     MD.MarkRating = Mathf.Round(float.Parse(result["rating"].ToString()));
+                }
+                //OpenCheck
+                var OpenTIme = (IDictionary)result["opening_hours"];
+                if (OpenTIme != null)
+                {
+                    MD.OpenCheck = (bool)OpenTIme["open_now"];
                 }
             }
 		}
