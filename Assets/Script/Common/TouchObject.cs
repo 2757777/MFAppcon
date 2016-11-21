@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class TouchObject : MonoBehaviour {
 
-    public Canvas MarkDetailCanvas;
+    public GameObject MarkDetailPrefab;
 	// Use this for initialization
 	void Start () {
 	
@@ -33,8 +33,9 @@ public class TouchObject : MonoBehaviour {
 
     void OpenMarkDetail(GameObject TouchObj)
     {
+        GameObject MarkDetailCanvas = Instantiate(MarkDetailPrefab);
         MarkDetailCanvas.GetComponent<ShowMarkDetail>().MD = TouchObj.GetComponent<MarkData>();
         MarkDetailCanvas.GetComponent<ShowMarkDetail>().SendMessage("RefreshData");
-        MarkDetailCanvas.enabled = true;
+        MarkDetailCanvas.GetComponent<Canvas>().enabled = true;
     }
 }
