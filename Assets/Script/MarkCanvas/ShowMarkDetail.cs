@@ -13,6 +13,8 @@ public class ShowMarkDetail : MonoBehaviour {
     public GameObject StarImage;
     public Transform StarParent;
 
+    public GameObject TypeList;
+    public GameObject TypePrefab;
     void RefreshData()
     {
         MarkName.text = MD.MarkName;
@@ -52,6 +54,24 @@ public class ShowMarkDetail : MonoBehaviour {
                 MarkOpenText.text = "Close Now";
                 MarkOpenText.color = new Color32(255, 0, 0, 255);
             }
+        }
+
+        //delete old Type
+        foreach (Transform n in TypeList.transform)
+        {
+            GameObject.Destroy(n.gameObject);
+        }
+
+        //Type
+        for (int i = 0; i < MD.MarkType.Count; i++)
+        {
+            if ((string)MD.MarkType[i] != "point_of_interest" || (string)MD.MarkType[i] != "establishment")//二つの例外
+            {
+                GameObject NewType = Instantiate(TypePrefab);
+                NewType.GetComponent<Text>().text = (string)MD.MarkType[i];
+                NewType.transform.SetParent(TypeList.transform);
+            }
+
         }
     }
 

@@ -103,6 +103,8 @@ namespace GoMap
                 {
                     MD.OpenCheck = (bool)OpenTIme["open_now"];
                 }
+                
+                MD.MarkType = (IList)result["types"];
             }
 		}
 	}
