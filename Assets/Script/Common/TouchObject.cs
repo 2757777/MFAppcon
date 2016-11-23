@@ -33,9 +33,9 @@ public class TouchObject : MonoBehaviour {
 
     void OpenMarkDetail(GameObject TouchObj)
     {
-        GameObject MarkDetailCanvas = Instantiate(MarkDetailPrefab);
-        MarkDetailCanvas.GetComponent<ShowMarkDetail>().MD = TouchObj.GetComponent<MarkData>();
-        MarkDetailCanvas.GetComponent<ShowMarkDetail>().SendMessage("RefreshData");
-        MarkDetailCanvas.GetComponent<Canvas>().enabled = true;
+        MarkDetailPrefab.GetComponent<Canvas>().enabled =true;
+        MarkDetailPrefab.GetComponent<ShowMarkDetail>().MD = TouchObj.GetComponent<MarkData>();
+        MarkDetailPrefab.GetComponent<ShowMarkDetail>().SendMessage("RefreshData");
+        MarkDetailPrefab.GetComponent<Canvas>().enabled = true;
     }
 }

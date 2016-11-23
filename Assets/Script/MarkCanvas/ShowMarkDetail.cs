@@ -12,19 +12,16 @@ public class ShowMarkDetail : MonoBehaviour {
 
     public GameObject StarImage;
     public Transform StarParent;
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     void RefreshData()
     {
         MarkName.text = MD.MarkName;
+        
+        //delete old star
+        foreach (Transform n in StarParent.transform)
+        {
+            GameObject.Destroy(n.gameObject);
+        }
         //add MarkStar
         for (int i = 0; i < MD.MarkRating; i++)
         {
@@ -45,6 +42,10 @@ public class ShowMarkDetail : MonoBehaviour {
             {
                 MarkOpenText.text = "Open Now";
                 MarkOpenText.color = new Color32(51,255,0,255);
+            }
+            else if (MD.OpenCheck == null)
+            {
+                MarkOpenText.text = "";
             }
             else
             {

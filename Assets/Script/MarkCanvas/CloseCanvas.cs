@@ -14,6 +14,6 @@ public class CloseCanvas : MonoBehaviour {
 	// Update is called once per frame
     void Close()
     {
-        Destroy(CloseObject);
+        CloseObject.GetComponent<Canvas>().enabled = false;
 	}
 }
