@@ -19,6 +19,12 @@ public class TreatmentKeyWord : MonoBehaviour
     void InstantiatePrefab(string KeyWord)
     {
         GameObject KeyWordObject = Instantiate(KeyWordPrefab);
+
+        byte R = (byte)Random.Range(150,255);
+        byte G = (byte)Random.Range(150,255);
+        byte B = (byte)Random.Range(150,255);
+        KeyWordObject.GetComponent<Image>().color = new Color32(R, G, B, 200);
+
         //子オブジェクトのテキストをキーワードに変更
         KeyWordObject.GetComponentInChildren<Text>().text = KeyWord;
 
