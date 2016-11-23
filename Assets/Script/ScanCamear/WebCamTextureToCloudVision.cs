@@ -12,6 +12,9 @@ public class WebCamTextureToCloudVision : MonoBehaviour {
 	public FeatureType featureType = FeatureType.FACE_DETECTION;
 	public int maxResults = 10;
 
+    public int KeyWordCount;
+    public bool ScanAgainCheck;
+
 	WebCamTexture webcamTexture;
 	Texture2D texture2D;
 	Dictionary<string, string> headers;
@@ -197,6 +200,7 @@ public class WebCamTextureToCloudVision : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        ScanAgainCheck = true;
 		headers = new Dictionary<string, string>();
 		headers.Add("Content-Type", "application/json; charset=UTF-8");
 
@@ -275,21 +279,28 @@ public class WebCamTextureToCloudVision : MonoBehaviour {
                 using (WWW www = new WWW(url, postData, headers))
                 {
                     yield return www;
-                    if (www.error == null)
+                    if (www.error == null && ScanAgainCheck)
                     {
                         Debug.Log(www.text.Replace("\n", "").Replace(" ", ""));
                         AnnotateImageResponses responses = JsonUtility.FromJson<AnnotateImageResponses>(www.text);
                         // SendMessage, BroadcastMessage or someting like that.
                         if (responses.responses.Count > 0)
                         {
+                            KeyWordCount = 0;
+
                             for (var i = 0; i < responses.responses.Count; i++)
                             {
                                 if (responses.responses[i].labelAnnotations != null && responses.responses[i].labelAnnotations.Count > 0)
                                 {
                                     for (var j = 0; j < responses.responses[i].labelAnnotations.Count; j++)
                                     {
-                                        if (responses.responses[i].labelAnnotations[j].score > 0.5)
+                                        if (responses.responses[i].labelAnnotations[j].score > 0.5 && KeyWordCount<5)
+                                        {
                                             Debug.Log(responses.responses[i].labelAnnotations[j].description);
+                                            gameObject.GetComponent<TreatmentKeyWord>().SendMessageUpwards("InstantiatePrefab", responses.responses[i].labelAnnotations[j].description);
+                                            KeyWordCount++;
+                                            ScanAgainCheck = false;
+                                        }
                                     }
                                 }
                             }
