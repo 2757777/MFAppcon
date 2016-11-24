@@ -65,7 +65,7 @@ public class ShowMarkDetail : MonoBehaviour {
         //Type
         for (int i = 0; i < MD.MarkType.Count; i++)
         {
-            if ((string)MD.MarkType[i] != "point_of_interest" || (string)MD.MarkType[i] != "establishment")//二つの例外
+            if ((string)MD.MarkType[i] != "point_of_interest" && (string)MD.MarkType[i] != "establishment")//二つの例外
             {
                 GameObject NewType = Instantiate(TypePrefab);
                 NewType.GetComponent<Text>().text = (string)MD.MarkType[i];
