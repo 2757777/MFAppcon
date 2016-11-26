@@ -17,7 +17,9 @@ public class AnimatePrefab : MonoBehaviour {
 			transform.Rotate (transform.eulerAngles.x, speed * Time.deltaTime, transform.eulerAngles.z);
 			isPlayerNear = true;
 		}
+
 	}
+
 
 	private IEnumerator rotate(float time) {
 
