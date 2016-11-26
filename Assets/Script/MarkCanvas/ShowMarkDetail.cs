@@ -45,15 +45,15 @@ public class ShowMarkDetail : MonoBehaviour {
                 MarkOpenText.text = "Open Now";
                 MarkOpenText.color = new Color32(51,255,0,255);
             }
-            else if (MD.OpenCheck == null)
-            {
-                MarkOpenText.text = "";
-            }
             else
             {
                 MarkOpenText.text = "Close Now";
                 MarkOpenText.color = new Color32(255, 0, 0, 255);
             }
+        }
+        else
+        {
+            MarkOpenText.text = "";
         }
 
         //delete old Type

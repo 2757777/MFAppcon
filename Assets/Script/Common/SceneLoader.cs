@@ -8,6 +8,8 @@ public class SceneLoader : MonoBehaviour {
     public GameObject MainCamera;
     public string SceneName;
     public Canvas MarkDetailCanvas;
+    public Canvas ToolsPanelCanvas;
+    public Canvas StatusCanvas;
 	void Start () 
     {
       Button  button = GetComponent<Button>();
@@ -19,6 +21,8 @@ public class SceneLoader : MonoBehaviour {
     {
         MainCamera.SetActive(false);
         MarkDetailCanvas.enabled = false;
+        ToolsPanelCanvas.enabled = false;
+        StatusCanvas.enabled = false;
         SceneManager.LoadScene(SceneName, LoadSceneMode.Additive);
 	}
 }
