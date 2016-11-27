@@ -6,6 +6,7 @@ public class MarkData : MonoBehaviour {
     public string MarkName;
     public string MarkPhoto;
     public float MarkRating;
+    public bool HaveOpenTime;
     public bool OpenCheck;
     public IList MarkType;
 	// Use this for initialization

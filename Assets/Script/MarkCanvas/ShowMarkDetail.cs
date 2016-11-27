@@ -42,7 +42,7 @@ public class ShowMarkDetail : MonoBehaviour {
             MarkImage.enabled = false;
         }
         //OpenCheck
-        if (MD.OpenCheck != null)
+        if (MD.HaveOpenTime)
         {
             if (MD.OpenCheck)
             {

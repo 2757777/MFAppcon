@@ -101,7 +101,12 @@ namespace GoMap
                 var OpenTIme = (IDictionary)result["opening_hours"];
                 if (OpenTIme != null)
                 {
+                    MD.HaveOpenTime = true;
                     MD.OpenCheck = (bool)OpenTIme["open_now"];
+                }
+                else
+                {
+                    MD.HaveOpenTime = false;
                 }
                 
                 MD.MarkType = (IList)result["types"];
