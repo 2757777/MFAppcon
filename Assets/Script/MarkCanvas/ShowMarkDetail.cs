@@ -34,9 +34,13 @@ public class ShowMarkDetail : MonoBehaviour {
         //LoadImage
         if (MD.MarkPhoto != "")
         {
+            MarkImage.enabled = true;
             StartCoroutine(LoadImage());
         }
-
+        else
+        {
+            MarkImage.enabled = false;
+        }
         //OpenCheck
         if (MD.OpenCheck != null)
         {
