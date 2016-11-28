@@ -7,6 +7,7 @@ public class TreatmentKeyWord : MonoBehaviour
 
     public GameObject KeyWordPrefab;
     public GameObject KeyWordList;
+    public Transform child;
 	// Use this for initialization
 	void Start () {
 	
@@ -20,6 +21,8 @@ public class TreatmentKeyWord : MonoBehaviour
     {
         GameObject KeyWordObject = Instantiate(KeyWordPrefab);
 
+        IList types = GameObject.Find("MarkDetailCanvas").GetComponent<ShowMarkDetail>().Types;
+
         byte R = (byte)Random.Range(150,255);
         byte G = (byte)Random.Range(150,255);
         byte B = (byte)Random.Range(150,255);
@@ -29,6 +32,18 @@ public class TreatmentKeyWord : MonoBehaviour
         KeyWordObject.GetComponentInChildren<Text>().text = KeyWord;
 
         KeyWordObject.transform.SetParent(KeyWordList.transform);
+
+
+        for (int i = 0; i < types.Count; i++)
+        {
+            if (KeyWord == types[i])
+            {
+                child = KeyWordObject.transform.FindChild("ExclamationMarkImage");
+                child.GetComponent<Image>().enabled = true;
+                break;
+            }
+ 
+        }
 
     }
     void CleanPrefab()

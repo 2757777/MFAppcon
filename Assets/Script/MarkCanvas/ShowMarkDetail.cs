@@ -15,6 +15,8 @@ public class ShowMarkDetail : MonoBehaviour {
 
     public GameObject TypeList;
     public GameObject TypePrefab;
+
+    public IList Types;
     void RefreshData()
     {
         MarkName.text = MD.MarkName;
@@ -57,7 +59,8 @@ public class ShowMarkDetail : MonoBehaviour {
         }
         else
         {
-            MarkOpenText.text = "";
+            MarkOpenText.text = "unknown";
+            MarkOpenText.color = new Color32(255, 0, 0, 255);
         }
 
         //delete old Type
@@ -67,6 +70,8 @@ public class ShowMarkDetail : MonoBehaviour {
         }
 
         //Type
+        Types = MD.MarkType;
+
         for (int i = 0; i < MD.MarkType.Count; i++)
         {
             if ((string)MD.MarkType[i] != "point_of_interest" && (string)MD.MarkType[i] != "establishment")//二つの例外
