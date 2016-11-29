@@ -39,6 +39,7 @@ public class TreatmentKeyWord : MonoBehaviour
             if (KeyWord == types[i])
             {
                 child = KeyWordObject.transform.FindChild("ExclamationMarkImage");
+                child.GetComponent<PushKeyWord>().IsPointKeyWord = true;
                 child.GetComponent<Image>().enabled = true;
                 break;
             }

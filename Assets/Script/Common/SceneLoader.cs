@@ -25,4 +25,13 @@ public class SceneLoader : MonoBehaviour {
         StatusCanvas.enabled = false;
         SceneManager.LoadScene(SceneName, LoadSceneMode.Additive);
 	}
-}
+
+    void BackScene()
+    {
+        MainCamera.SetActive(true);
+        MarkDetailCanvas.enabled = true;
+        ToolsPanelCanvas.enabled = true;
+        StatusCanvas.enabled = true;
+        SceneManager.UnloadScene("ScanCamear");
+    }
+    }

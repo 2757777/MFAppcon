@@ -15,6 +15,7 @@ public class ScanAgain : MonoBehaviour {
     void Again()
     {
         CameraPlane.GetComponent<TreatmentKeyWord>().SendMessage("CleanPrefab");
+        CameraPlane.GetComponent<WebCamTextureToCloudVision>().captureIntervalSeconds = 2f;
         CameraPlane.GetComponent<WebCamTextureToCloudVision>().ScanAgainCheck = true;
 	}
 }

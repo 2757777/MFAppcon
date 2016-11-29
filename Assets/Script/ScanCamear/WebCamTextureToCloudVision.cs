@@ -6,7 +6,7 @@ public class WebCamTextureToCloudVision : MonoBehaviour {
 
 	public string url = "https://vision.googleapis.com/v1/images:annotate?key=";
 	public string apiKey = "";
-	public float captureIntervalSeconds = 2f;
+	public float captureIntervalSeconds = 5f;
 	public int requestedWidth = 640;
 	public int requestedHeight = 480;
 	public FeatureType featureType = FeatureType.FACE_DETECTION;
@@ -15,7 +15,7 @@ public class WebCamTextureToCloudVision : MonoBehaviour {
     public int KeyWordCount;
     public bool ScanAgainCheck;
 
-	WebCamTexture webcamTexture;
+	public WebCamTexture webcamTexture;
 	Texture2D texture2D;
 	Dictionary<string, string> headers;
 
