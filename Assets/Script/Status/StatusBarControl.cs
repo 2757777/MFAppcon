@@ -20,12 +20,14 @@ public class StatusBarControl : MonoBehaviour {
 	void Start () {
         //起動
         Status = GameManger.GetComponent<PlayerStatus>();
-        HungryBar.GetComponent<EnergyBar>().valueCurrent = PlayerPrefs.GetInt(Status.hungry);
-        HappyBar.GetComponent<EnergyBar>().valueCurrent = PlayerPrefs.GetInt(Status.happy);
-        HealthBar.GetComponent<EnergyBar>().valueCurrent = PlayerPrefs.GetInt(Status.health);
-        EnergyBar.GetComponent<EnergyBar>().valueCurrent = PlayerPrefs.GetInt(Status.energy);
-        NewDate();
-
+        if (PlayerPrefs.GetInt(Status.hungry) > 0)
+        {
+            HungryBar.GetComponent<EnergyBar>().valueCurrent = PlayerPrefs.GetInt(Status.hungry);
+            HappyBar.GetComponent<EnergyBar>().valueCurrent = PlayerPrefs.GetInt(Status.happy);
+            HealthBar.GetComponent<EnergyBar>().valueCurrent = PlayerPrefs.GetInt(Status.health);
+            EnergyBar.GetComponent<EnergyBar>().valueCurrent = PlayerPrefs.GetInt(Status.energy);
+            NewDate();
+        }
         //30秒一回Hungry-1
         TimersManager.SetLoopableTimer(this, 30f, HungryExpend);
 
@@ -55,49 +57,58 @@ public class StatusBarControl : MonoBehaviour {
     }
     void HungryExpend()
     {
-        HungryBar.GetComponent<EnergyBar>().valueCurrent--;
+        if (HungryBar.GetComponent<EnergyBar>().valueCurrent > 1)
+        {
+            HungryBar.GetComponent<EnergyBar>().valueCurrent--;
+        }
     }
 
     void HappyCheck()
     {
-        int HungryPoint = HungryBar.GetComponent<EnergyBar>().valueCurrent;
-        int HealthPoint = HealthBar.GetComponent<EnergyBar>().valueCurrent;
-        //Hungry関連
-        if (HungryPoint < 90)
+        if (HappyBar.GetComponent<EnergyBar>().valueCurrent > 1)
         {
-            HappyBar.GetComponent<EnergyBar>().valueCurrent--;
-            if (HungryPoint < 75)
+            int HungryPoint = HungryBar.GetComponent<EnergyBar>().valueCurrent;
+            int HealthPoint = HealthBar.GetComponent<EnergyBar>().valueCurrent;
+            //Hungry関連
+            if (HungryPoint < 90)
             {
-                HappyBar.GetComponent<EnergyBar>().valueCurrent -= 2;
-                if (HungryPoint < 60)
+                HappyBar.GetComponent<EnergyBar>().valueCurrent--;
+                if (HungryPoint < 75)
                 {
-                    HappyBar.GetComponent<EnergyBar>().valueCurrent -= 3;
-                    if (HungryPoint < 30)
+                    HappyBar.GetComponent<EnergyBar>().valueCurrent -= 2;
+                    if (HungryPoint < 60)
                     {
-                        HappyBar.GetComponent<EnergyBar>().valueCurrent -= 5;
+                        HappyBar.GetComponent<EnergyBar>().valueCurrent -= 3;
+                        if (HungryPoint < 30)
+                        {
+                            HappyBar.GetComponent<EnergyBar>().valueCurrent -= 5;
+                        }
                     }
                 }
             }
-        }
-        else if (HungryPoint < 100)
-        {
-            HappyBar.GetComponent<EnergyBar>().valueCurrent += 3;
-        }
-        //Health関連
-        if (HealthPoint < 80)
-        {
-            HappyBar.GetComponent<EnergyBar>().valueCurrent--;
-            if (HealthPoint < 50)
+            else if (HungryPoint < 100)
             {
-                HappyBar.GetComponent<EnergyBar>().valueCurrent -= 3;
+                HappyBar.GetComponent<EnergyBar>().valueCurrent += 3;
             }
-        }
+            //Health関連
+            if (HealthPoint < 80)
+            {
+                HappyBar.GetComponent<EnergyBar>().valueCurrent--;
+                if (HealthPoint < 50)
+                {
+                    HappyBar.GetComponent<EnergyBar>().valueCurrent -= 3;
+                }
+            }
 
+        }
     }
 
     void HealthExpend()
     {
-        HealthBar.GetComponent<EnergyBar>().valueCurrent--;
+        if (HealthBar.GetComponent<EnergyBar>().valueCurrent > 1)
+        {
+            HealthBar.GetComponent<EnergyBar>().valueCurrent--;
+        }
     }
 
 
