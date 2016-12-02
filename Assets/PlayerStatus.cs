@@ -2,12 +2,12 @@
 using System.Collections;
 
 public class PlayerStatus : MonoBehaviour {
-   public string happy  = "happy";
-   public string health = "health";
-   public string hungry = "hungry";
-   public string energy = "energy";
-   public string money = "money";
-   public string scanCount = "ScanCount";
+   public string happy;
+   public string health;
+   public string hungry;
+   public string energy;
+   public string money;
+   public string scanCount;
 	// Use this for initialization
 	void Start () {
 	
@@ -15,10 +15,10 @@ public class PlayerStatus : MonoBehaviour {
 	
 	public void SaveStateData (int ha,int hu,int he) 
     {
+        Debug.Log(hu);
         PlayerPrefs.SetInt(happy, ha);
         PlayerPrefs.SetInt(hungry, hu);
         PlayerPrefs.SetInt(health, he);
         PlayerPrefs.Save();
-        Debug.Log(PlayerPrefs.GetInt(energy));
 	}
 }
