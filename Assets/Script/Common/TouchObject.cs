@@ -5,9 +5,14 @@ using UnityEngine.UI;
 public class TouchObject : MonoBehaviour {
 
     public GameObject MarkDetailPrefab;
+    public Image ScanButtonImage;
+    System.DateTime LastTime;
+
 	// Use this for initialization
-	void Start () {
-	
+	void Start () 
+    {
+        LastTime = System.DateTime.Now;
+
 	}
 	
 	// Update is called once per frame
@@ -37,5 +42,10 @@ public class TouchObject : MonoBehaviour {
         MarkDetailPrefab.GetComponent<ShowMarkDetail>().MD = TouchObj.GetComponent<MarkData>();
         MarkDetailPrefab.GetComponent<ShowMarkDetail>().SendMessage("RefreshData");
         MarkDetailPrefab.GetComponent<Canvas>().enabled = true;
+
+        //スキャン回数回復
+        System.DateTime NowTime = System.DateTime.Now;
+
+
     }
 }

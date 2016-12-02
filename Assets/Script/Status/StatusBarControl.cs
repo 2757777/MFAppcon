@@ -9,14 +9,23 @@ public class StatusBarControl : MonoBehaviour {
     public GameObject HappyBar;
     public GameObject HealthBar;
     public GameObject EnergyBar;
+    public GameObject GameManger;
 
+    PlayerStatus Status;
     public Text HungryPointText;
     public Text HappyPointText;
     public Text HealthPointText;
     public Text EnergyPointText;
 
 	void Start () {
-        
+        //起動
+        Status = GameManger.GetComponent<PlayerStatus>();
+        HungryBar.GetComponent<EnergyBar>().valueCurrent = PlayerPrefs.GetInt(Status.hungry);
+        HappyBar.GetComponent<EnergyBar>().valueCurrent = PlayerPrefs.GetInt(Status.happy);
+        HealthBar.GetComponent<EnergyBar>().valueCurrent = PlayerPrefs.GetInt(Status.health);
+        EnergyBar.GetComponent<EnergyBar>().valueCurrent = PlayerPrefs.GetInt(Status.energy);
+        NewDate();
+
         //30秒一回Hungry-1
         TimersManager.SetLoopableTimer(this, 30f, HungryExpend);
 
@@ -31,9 +40,6 @@ public class StatusBarControl : MonoBehaviour {
 
 	}
 	
-	void Update () {
-	
-	}
 
     void NewDate()
     {
@@ -44,6 +50,8 @@ public class StatusBarControl : MonoBehaviour {
         HealthPointText.text = HealthBar.GetComponent<EnergyBar>().valueCurrent + "%";
 
         EnergyPointText.text = EnergyBar.GetComponent<EnergyBar>().valueCurrent + "%";
+
+        Status.SaveStateData(HappyBar.GetComponent<EnergyBar>().valueCurrent, HungryBar.GetComponent<EnergyBar>().valueCurrent, HealthBar.GetComponent<EnergyBar>().valueCurrent);
     }
     void HungryExpend()
     {
