@@ -67,7 +67,7 @@ public class StatusBarControl : MonoBehaviour {
 	}
 	
 
-    void NewDate()
+   public void NewDate()
     {
         HungryPointText.text = HungryBar.GetComponent<EnergyBar>().valueCurrent + "%";
 

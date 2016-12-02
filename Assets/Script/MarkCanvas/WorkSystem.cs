@@ -22,7 +22,7 @@ public class WorkSystem : MonoBehaviour {
 	void WorkClick () 
     {
         StatusBar.EnergyBar.GetComponent<EnergyBar>().valueCurrent -= 10;
-        status.SaveEnergy(StatusBar.EnergyBar.GetComponent<EnergyBar>().valueCurrent);
+        StatusBar.NewDate();
         status.HaveMoney += MarkDetail.WorkPay;
         MoneyText.text = "Money:" + status.HaveMoney.ToString();
         status.SaveMoney();

@@ -30,9 +30,4 @@ public class PlayerStatus : MonoBehaviour {
     {
         PlayerPrefs.SetInt(money, HaveMoney);
     }
-
-    public void SaveEnergy(int en)
-    {
-        PlayerPrefs.SetInt(energy, en);
-    }
 }
