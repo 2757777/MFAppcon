@@ -17,9 +17,22 @@ public class ShowMarkDetail : MonoBehaviour {
     public GameObject TypePrefab;
 
     public IList Types;
+
+    public StatusBarControl StatusBar;
+
+    //時給計算
+    public Button WorkButton;
+    public bool Open;
+    public int StarBouns;
+    public bool ScanBouns;
+    public int WorkPay;
+    public Text PayText;
     void RefreshData()
     {
         MarkName.text = MD.MarkName;
+        Open = false;
+        StarBouns = 0;
+        ScanBouns = false;
         
         //delete old star
         foreach (Transform n in StarParent.transform)
@@ -31,6 +44,7 @@ public class ShowMarkDetail : MonoBehaviour {
         {
             GameObject NewStar = Instantiate(StarImage);
             NewStar.transform.SetParent(StarParent);
+            StarBouns++;
         }
 
         //LoadImage
@@ -50,6 +64,7 @@ public class ShowMarkDetail : MonoBehaviour {
             {
                 MarkOpenText.text = "Open Now";
                 MarkOpenText.color = new Color32(51,255,0,255);
+                Open =true;
             }
             else
             {
@@ -82,6 +97,18 @@ public class ShowMarkDetail : MonoBehaviour {
             }
 
         }
+
+        //WorkSystem
+        if (Open && StatusBar.EnergyBar.GetComponent<EnergyBar>().valueCurrent > 10)
+        {
+            WorkButton.interactable = Open;
+        }
+        else
+        {
+            WorkButton.interactable = false;
+        }
+        WorkPay = 950 + 100 * (StarBouns + ScanBouns.GetHashCode());
+        PayText.text = "Hourly Pay:\n" + WorkPay;
     }
 
     IEnumerator LoadImage()

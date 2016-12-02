@@ -16,17 +16,38 @@ public class StatusBarControl : MonoBehaviour {
     public Text HappyPointText;
     public Text HealthPointText;
     public Text EnergyPointText;
+    public Text MoneyText;
 
 	void Start () {
+
         //起動
         Status = GameManger.GetComponent<PlayerStatus>();
         if (PlayerPrefs.GetInt(Status.hungry) > 0)
         {
             HungryBar.GetComponent<EnergyBar>().valueCurrent = PlayerPrefs.GetInt(Status.hungry);
-            HappyBar.GetComponent<EnergyBar>().valueCurrent = PlayerPrefs.GetInt(Status.happy);
+            HappyBar.GetComponent<EnergyBar>().valueCurrent  = PlayerPrefs.GetInt(Status.happy);
             HealthBar.GetComponent<EnergyBar>().valueCurrent = PlayerPrefs.GetInt(Status.health);
             EnergyBar.GetComponent<EnergyBar>().valueCurrent = PlayerPrefs.GetInt(Status.energy);
+            Status.HaveMoney = PlayerPrefs.GetInt(Status.money);
+            MoneyText.text = "Money:" + Status.HaveMoney;
             NewDate();
+        }
+        else
+        {
+            //初回起動
+            Status.HaveMoney = 1000;
+            MoneyText.text = "Money:1000";
+            HungryBar.GetComponent<EnergyBar>().valueCurrent = 100;
+            HappyBar.GetComponent<EnergyBar>().valueCurrent  = 100;
+            HealthBar.GetComponent<EnergyBar>().valueCurrent = 100;
+            EnergyBar.GetComponent<EnergyBar>().valueCurrent = 100;
+
+            Status.SaveMoney();
+
+            Status.SaveStateData(HappyBar.GetComponent<EnergyBar>().valueCurrent,
+                             HungryBar.GetComponent<EnergyBar>().valueCurrent,
+                             HealthBar.GetComponent<EnergyBar>().valueCurrent,
+                             EnergyBar.GetComponent<EnergyBar>().valueCurrent);
         }
         //30秒一回Hungry-1
         TimersManager.SetLoopableTimer(this, 30f, HungryExpend);
@@ -36,6 +57,9 @@ public class StatusBarControl : MonoBehaviour {
 
         //180秒一回Health--
         TimersManager.SetLoopableTimer(this, 90f,HealthExpend);
+
+        //10分一回Energy++
+        TimersManager.SetLoopableTimer(this, 600f, EnergyPlus);
 
         //30秒一回TEXT更新
         TimersManager.SetLoopableTimer(this, 30f, NewDate);
@@ -53,7 +77,10 @@ public class StatusBarControl : MonoBehaviour {
 
         EnergyPointText.text = EnergyBar.GetComponent<EnergyBar>().valueCurrent + "%";
 
-        Status.SaveStateData(HappyBar.GetComponent<EnergyBar>().valueCurrent, HungryBar.GetComponent<EnergyBar>().valueCurrent, HealthBar.GetComponent<EnergyBar>().valueCurrent);
+        Status.SaveStateData(HappyBar.GetComponent<EnergyBar>().valueCurrent, 
+                             HungryBar.GetComponent<EnergyBar>().valueCurrent, 
+                             HealthBar.GetComponent<EnergyBar>().valueCurrent,
+                             EnergyBar.GetComponent<EnergyBar>().valueCurrent);
     }
     void HungryExpend()
     {
@@ -108,6 +135,13 @@ public class StatusBarControl : MonoBehaviour {
         if (HealthBar.GetComponent<EnergyBar>().valueCurrent > 1)
         {
             HealthBar.GetComponent<EnergyBar>().valueCurrent--;
+        }
+    }
+    void EnergyPlus()
+    {
+        if (EnergyBar.GetComponent<EnergyBar>().valueCurrent < 100)
+        {
+            EnergyBar.GetComponent<EnergyBar>().valueCurrent++;
         }
     }
 
