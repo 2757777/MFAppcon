@@ -3,6 +3,7 @@ using System.Collections;
 
 public class MarkData : MonoBehaviour {
 
+    public string ParentType;
     public string MarkName;
     public string MarkPhoto;
     public float MarkRating;

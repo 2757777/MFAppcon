@@ -4,9 +4,8 @@ using System.Collections;
 
 public class ShowMarkDetail : MonoBehaviour {
 
+    public string MDParentType;
     public MarkData MD;
-
-    public GoMap.LocationManager Loction;
 
     public Text MarkName;
     public Image MarkImage;
@@ -40,6 +39,8 @@ public class ShowMarkDetail : MonoBehaviour {
     void RefreshData()
     {
         MarkName.text = MD.MarkName;
+        MDParentType = MD.ParentType;
+
         Open = false;
         StarBouns = 0;
         ScanBouns = false;

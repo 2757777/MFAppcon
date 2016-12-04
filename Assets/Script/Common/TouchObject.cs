@@ -31,7 +31,11 @@ public class TouchObject : MonoBehaviour {
                 {
                     OpenMarkDetail(obj);
                 }
-                Debug.Log(obj.name);
+                else 
+                    if (obj.tag == "CheckIn")
+                {
+                    CheckIn(obj);
+                }
             }
         }
     }
@@ -43,10 +47,10 @@ public class TouchObject : MonoBehaviour {
         MarkDetailPrefab.GetComponent<ShowMarkDetail>().MDPostion = TouchObj.transform.position;
         MarkDetailPrefab.GetComponent<ShowMarkDetail>().SendMessage("RefreshData");
         MarkDetailPrefab.GetComponent<Canvas>().enabled = true;
+    }
 
-        //スキャン回数回復
-        System.DateTime NowTime = System.DateTime.Now;
-
-
+    void CheckIn(GameObject TouchObj)
+    {
+        Debug.Log("OK");
     }
 }

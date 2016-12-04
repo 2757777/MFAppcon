@@ -17,7 +17,7 @@ namespace GoMap
 		public GameObject prefab;
 		public float queryRadius = 3000;
 
-		Coordinates lastQueryCenter = null;
+		public Coordinates lastQueryCenter = null;
 
 		// Use this for initialization
 		void Awake () {
@@ -33,7 +33,7 @@ namespace GoMap
 
 		}
 			
-		void LoadData (Coordinates currentLocation) {//This is called when the location changes
+		public void LoadData (Coordinates currentLocation) {//This is called when the location changes
 
 			if (lastQueryCenter == null || lastQueryCenter.DistanceFromPoint (currentLocation) >= queryRadius/1.5f) { //Do the request only if approaching the limit of the previous one
 				lastQueryCenter = currentLocation;
@@ -110,6 +110,7 @@ namespace GoMap
                 }
                 
                 MD.MarkType = (IList)result["types"];
+                MD.ParentType = type;
             }
 		}
 	}
