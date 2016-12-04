@@ -13,6 +13,8 @@ public class WorkSystem : MonoBehaviour {
 
     public StatusBarControl StatusBar;
 
+    public Canvas MarkDetailCanvas;
+
     void Start () 
     {
         Button button = GetComponent<Button>();
@@ -21,10 +23,15 @@ public class WorkSystem : MonoBehaviour {
 	
 	void WorkClick () 
     {
-        StatusBar.EnergyBar.GetComponent<EnergyBar>().valueCurrent -= 10;
-        StatusBar.NewDate();
-        status.HaveMoney += MarkDetail.WorkPay;
-        MoneyText.text = "Money:" + status.HaveMoney.ToString();
-        status.SaveMoney();
+        if (MarkDetail.DistanceCheck())
+        {
+            StatusBar.EnergyBar.GetComponent<EnergyBar>().valueCurrent -= 10;
+            StatusBar.NewDate();
+            status.HaveMoney += MarkDetail.WorkPay;
+            MoneyText.text = "Money:" + status.HaveMoney.ToString();
+            status.SaveMoney();
+            MarkDetailCanvas.enabled = false;
+        }
+
 	}
 }

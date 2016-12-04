@@ -40,6 +40,7 @@ public class TouchObject : MonoBehaviour {
     {
         MarkDetailPrefab.GetComponent<Canvas>().enabled =true;
         MarkDetailPrefab.GetComponent<ShowMarkDetail>().MD = TouchObj.GetComponent<MarkData>();
+        MarkDetailPrefab.GetComponent<ShowMarkDetail>().MDPostion = TouchObj.transform.position;
         MarkDetailPrefab.GetComponent<ShowMarkDetail>().SendMessage("RefreshData");
         MarkDetailPrefab.GetComponent<Canvas>().enabled = true;
 

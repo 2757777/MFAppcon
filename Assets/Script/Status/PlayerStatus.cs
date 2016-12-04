@@ -17,7 +17,6 @@ public class PlayerStatus : MonoBehaviour {
 	
 	public void SaveStateData (int ha, int hu, int he, int en) 
     {
-        Debug.Log(hu);
         PlayerPrefs.SetInt(happy, ha);
         PlayerPrefs.SetInt(hungry, hu);
         PlayerPrefs.SetInt(health, he);

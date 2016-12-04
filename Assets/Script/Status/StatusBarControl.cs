@@ -27,7 +27,7 @@ public class StatusBarControl : MonoBehaviour {
             HungryBar.GetComponent<EnergyBar>().valueCurrent = PlayerPrefs.GetInt(Status.hungry);
             HappyBar.GetComponent<EnergyBar>().valueCurrent  = PlayerPrefs.GetInt(Status.happy);
             HealthBar.GetComponent<EnergyBar>().valueCurrent = PlayerPrefs.GetInt(Status.health);
-            EnergyBar.GetComponent<EnergyBar>().valueCurrent = PlayerPrefs.GetInt(Status.energy);
+            EnergyBar.GetComponent<EnergyBar>().valueCurrent = 100;//PlayerPrefs.GetInt(Status.energy);
             Status.HaveMoney = PlayerPrefs.GetInt(Status.money);
             MoneyText.text = "Money:" + Status.HaveMoney;
             NewDate();

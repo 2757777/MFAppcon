@@ -6,8 +6,6 @@ public class AnimatePrefab : MonoBehaviour {
 	public float speed = 500;
 	public bool continousRotation;
     public bool isAnimating;
-	public bool isPlayerNear;
-
 	void OnCollisionEnter(Collision collision) {
 
 		if (!isAnimating && !continousRotation) 
@@ -15,14 +13,12 @@ public class AnimatePrefab : MonoBehaviour {
 		else if (continousRotation) 
 		{
 			transform.Rotate (transform.eulerAngles.x, speed * Time.deltaTime, transform.eulerAngles.z);
-			isPlayerNear = true;
 		}
 
 	}
 
 
 	private IEnumerator rotate(float time) {
-
 		isAnimating = true;
 		float elapsedTime = 0;
 

@@ -10,21 +10,26 @@ public class SceneLoader : MonoBehaviour {
     public Canvas MarkDetailCanvas;
     public Canvas ToolsPanelCanvas;
     public Canvas StatusCanvas;
+
+    public ShowMarkDetail SMD;
 	void Start () 
     {
       Button  button = GetComponent<Button>();
         button.onClick.AddListener(ShowScene);
 
 	}
-	
+
     void ShowScene()
     {
-        MainCamera.SetActive(false);
-        MarkDetailCanvas.enabled = false;
-        ToolsPanelCanvas.enabled = false;
-        StatusCanvas.enabled = false;
-        SceneManager.LoadScene(SceneName, LoadSceneMode.Additive);
-	}
+        if (SMD.DistanceCheck())
+        {
+            MainCamera.SetActive(false);
+            MarkDetailCanvas.enabled = false;
+            ToolsPanelCanvas.enabled = false;
+            StatusCanvas.enabled = false;
+            SceneManager.LoadScene(SceneName, LoadSceneMode.Additive);
+        }
+    }
 
     void BackScene()
     {
@@ -34,4 +39,4 @@ public class SceneLoader : MonoBehaviour {
         StatusCanvas.enabled = true;
         SceneManager.UnloadScene("ScanCamear");
     }
-    }
+}

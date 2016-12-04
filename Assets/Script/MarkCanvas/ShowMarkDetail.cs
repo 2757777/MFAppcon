@@ -6,6 +6,8 @@ public class ShowMarkDetail : MonoBehaviour {
 
     public MarkData MD;
 
+    public GoMap.LocationManager Loction;
+
     public Text MarkName;
     public Image MarkImage;
     public Text MarkOpenText;
@@ -27,13 +29,21 @@ public class ShowMarkDetail : MonoBehaviour {
     public bool ScanBouns;
     public int WorkPay;
     public Text PayText;
+
+    //距離チェック
+    public Vector3 MDPostion;
+
+    public GameObject Player;
+
+    public GameObject WarningMark;
+ 
     void RefreshData()
     {
         MarkName.text = MD.MarkName;
         Open = false;
         StarBouns = 0;
         ScanBouns = false;
-        
+        WarningMark.SetActive(false);
         //delete old star
         foreach (Transform n in StarParent.transform)
         {
@@ -99,7 +109,7 @@ public class ShowMarkDetail : MonoBehaviour {
         }
 
         //WorkSystem
-        if (Open && StatusBar.EnergyBar.GetComponent<EnergyBar>().valueCurrent > 10)
+        if (Open && StatusBar.EnergyBar.GetComponent<EnergyBar>().valueCurrent > 10 && Types[0] != "park")
         {
             WorkButton.interactable = Open;
         }
@@ -109,6 +119,7 @@ public class ShowMarkDetail : MonoBehaviour {
         }
         WorkPay = 950 + 100 * (StarBouns + ScanBouns.GetHashCode());
         PayText.text = "Hourly Pay:\n" + WorkPay;
+
     }
 
     IEnumerator LoadImage()
@@ -117,6 +128,21 @@ public class ShowMarkDetail : MonoBehaviour {
         WWW www = new WWW(MD.MarkPhoto);
         yield return www;
         MarkImage.sprite = Sprite.Create(www.texture,new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0));
+    }
+
+    public bool DistanceCheck()
+    {
+        float dis = Vector3.Distance(Player.transform.position, MDPostion);
+        Debug.Log(dis);
+        if (dis < 27.5)
+        {
+            return true;
+        }
+        else
+        {
+            WarningMark.SetActive(true);
+            return false;
+        }
     }
 
 }
