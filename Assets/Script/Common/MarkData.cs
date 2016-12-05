@@ -10,6 +10,7 @@ public class MarkData : MonoBehaviour {
     public bool HaveOpenTime;
     public bool OpenCheck;
     public IList MarkType;
+    public string MarkID;
 	// Use this for initialization
 	void Start () {
 	

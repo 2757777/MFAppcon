@@ -35,16 +35,30 @@ public class ShowMarkDetail : MonoBehaviour {
     public GameObject Player;
 
     public GameObject WarningMark;
+    public Text WarningMarkText;
  
+
+    //IDcheck
+    public string MDID;
+    public string LastID;
     void RefreshData()
     {
         MarkName.text = MD.MarkName;
         MDParentType = MD.ParentType;
+        MDID = MD.MarkID;
 
         Open = false;
         StarBouns = 0;
         ScanBouns = false;
-        WarningMark.SetActive(false);
+        if (MDID != LastID)
+        {
+            WarningMark.SetActive(false);
+        }
+        else
+        {
+            WarningMark.SetActive(true);
+            WarningMarkText.text = "You can't check in \n the same Place twice";
+        }
         //delete old star
         foreach (Transform n in StarParent.transform)
         {
@@ -108,6 +122,9 @@ public class ShowMarkDetail : MonoBehaviour {
             }
 
         }
+        //CheckInSystem
+
+
 
         //WorkSystem
         if (Open && StatusBar.EnergyBar.GetComponent<EnergyBar>().valueCurrent > 10 && Types[0] != "park")
@@ -137,11 +154,13 @@ public class ShowMarkDetail : MonoBehaviour {
         Debug.Log(dis);
         if (dis < 27.5)
         {
+            LastID = MDID;
             return true;
         }
         else
         {
             WarningMark.SetActive(true);
+            WarningMarkText.text = "Too far from this point\nPlease try again";
             return false;
         }
     }

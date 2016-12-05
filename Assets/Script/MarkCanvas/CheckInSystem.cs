@@ -11,6 +11,8 @@ public class CheckInSystem : MonoBehaviour {
     public GameObject Energy;
     public GameObject Happy;
 
+    public Canvas MarkDetailCanvas;
+
     public ShowMarkDetail MarkDetail;
     string DropType;
 	void Start () {
@@ -27,6 +29,7 @@ public class CheckInSystem : MonoBehaviour {
             DropType = MarkDetail.MDParentType;
             Vector3 playerPostion = Player.transform.position;
             Instantiate(InstantiateType(DropType), new Vector3((playerPostion.x + Random.Range(-20, 20)), playerPostion.y, (playerPostion.z + Random.Range(-20, 20))), Quaternion.identity);
+            MarkDetailCanvas.enabled = false;
         }
 	}
    GameObject InstantiateType(string type)

@@ -5,13 +5,14 @@ using UnityEngine.UI;
 public class TouchObject : MonoBehaviour {
 
     public GameObject MarkDetailPrefab;
-    public Image ScanButtonImage;
-    System.DateTime LastTime;
+  //  public Image ScanButtonImage;
+   // System.DateTime LastTime;
 
+    public StatusBarControl Status;
 	// Use this for initialization
 	void Start () 
     {
-        LastTime = System.DateTime.Now;
+       // LastTime = System.DateTime.Now;
 
 	}
 	
@@ -51,6 +52,9 @@ public class TouchObject : MonoBehaviour {
 
     void CheckIn(GameObject TouchObj)
     {
-        Debug.Log("OK");
+       TouchIconSystem.TouchIconType tTyep = TouchObj.GetComponent<TouchIconSystem>().IconType;
+
+       Status.TouchIconPlus(tTyep);
+        Destroy(TouchObj);
     }
 }

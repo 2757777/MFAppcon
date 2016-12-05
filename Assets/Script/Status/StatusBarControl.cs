@@ -58,9 +58,6 @@ public class StatusBarControl : MonoBehaviour {
         //180秒一回Health--
         TimersManager.SetLoopableTimer(this, 90f,HealthExpend);
 
-        //10分一回Energy++
-        TimersManager.SetLoopableTimer(this, 600f, EnergyPlus);
-
         //30秒一回TEXT更新
         TimersManager.SetLoopableTimer(this, 30f, NewDate);
 
@@ -141,7 +138,30 @@ public class StatusBarControl : MonoBehaviour {
     {
         if (EnergyBar.GetComponent<EnergyBar>().valueCurrent < 100)
         {
-            EnergyBar.GetComponent<EnergyBar>().valueCurrent++;
+            EnergyBar.GetComponent<EnergyBar>().valueCurrent += 10;
+            NewDate();
+        }
+    }
+
+   public void TouchIconPlus(TouchIconSystem.TouchIconType IconType)
+    {
+        switch (IconType)
+        {
+            case TouchIconSystem.TouchIconType.Energy:
+                EnergyPlus();
+                break;
+            case TouchIconSystem.TouchIconType.Happy:
+                HappyBar.GetComponent<EnergyBar>().valueCurrent += 5;
+                NewDate();
+                break;
+            case TouchIconSystem.TouchIconType.Health:
+                HealthBar.GetComponent<EnergyBar>().valueCurrent += 5;
+                NewDate();
+                break;
+            case TouchIconSystem.TouchIconType.Hungry:
+                HungryBar.GetComponent<EnergyBar>().valueCurrent += 10;
+                NewDate();
+                break;
         }
     }
 

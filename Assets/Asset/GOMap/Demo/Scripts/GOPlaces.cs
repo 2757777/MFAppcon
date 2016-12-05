@@ -83,6 +83,8 @@ namespace GoMap
                 go.name = (string)result["place_id"];
 
                 MarkData MD = go.GetComponent<MarkData>();
+                //ID
+                MD.MarkID = (string)result["place_id"];
                 //Name
                 MD.MarkName = (string)result["name"];
                 //CheckPhoto
