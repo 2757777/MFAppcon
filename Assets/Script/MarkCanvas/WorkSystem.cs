@@ -22,6 +22,7 @@ public class WorkSystem : MonoBehaviour {
     public GameObject GentlenessBar;
     public GameObject CharmBar;
 
+    public InformationSystem infor;
     void Start () 
     {
         Button button = GetComponent<Button>();
@@ -38,13 +39,14 @@ public class WorkSystem : MonoBehaviour {
             MoneyText.text = "Money:" + status.HaveMoney.ToString();
             status.SaveMoney();
             MarkDetailCanvas.enabled = false;
-            PulsParameter();
+            infor.informationStandby("You got " + MarkDetail.WorkPay);
+            Invoke("PulsParameter", 3f);
         }
-
 	}
 
     void PulsParameter()
     {
+        infor.informationStandby("Your parameter up");
         switch (Random.Range(0, 5))
         {
             case 0:

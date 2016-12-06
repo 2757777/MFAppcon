@@ -13,7 +13,8 @@ public class InformationSystem : MonoBehaviour
    public void informationStandby (string infor)
    {
        information = infor;
-	    Invoke("DelayMethod", 3.5f);
+       DelayMethod();
+	    //Invoke("DelayMethod", 1f);
 
 	}
 

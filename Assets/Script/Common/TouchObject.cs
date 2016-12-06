@@ -53,7 +53,6 @@ public class TouchObject : MonoBehaviour {
     void CheckIn(GameObject TouchObj)
     {
        TouchIconSystem.TouchIconType tTyep = TouchObj.GetComponent<TouchIconSystem>().IconType;
-
        Status.TouchIconPlus(tTyep);
         Destroy(TouchObj);
     }

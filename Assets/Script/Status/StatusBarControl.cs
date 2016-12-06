@@ -18,6 +18,7 @@ public class StatusBarControl : MonoBehaviour {
     public Text EnergyPointText;
     public Text MoneyText;
 
+    public InformationSystem infor;
 	void Start () {
 
         //起動
@@ -148,17 +149,21 @@ public class StatusBarControl : MonoBehaviour {
         switch (IconType)
         {
             case TouchIconSystem.TouchIconType.Energy:
+                infor.informationStandby("Your energy has recovered");
                 EnergyPlus();
                 break;
             case TouchIconSystem.TouchIconType.Happy:
+                infor.informationStandby("You feel some happy");
                 HappyBar.GetComponent<EnergyBar>().valueCurrent += 5;
                 NewDate();
                 break;
             case TouchIconSystem.TouchIconType.Health:
+                infor.informationStandby("You got cured");
                 HealthBar.GetComponent<EnergyBar>().valueCurrent += 5;
                 NewDate();
                 break;
             case TouchIconSystem.TouchIconType.Hungry:
+                infor.informationStandby("You got some food");
                 HungryBar.GetComponent<EnergyBar>().valueCurrent += 10;
                 NewDate();
                 break;

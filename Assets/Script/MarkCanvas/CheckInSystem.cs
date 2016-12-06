@@ -14,6 +14,7 @@ public class CheckInSystem : MonoBehaviour {
     public Canvas MarkDetailCanvas;
 
     public ShowMarkDetail MarkDetail;
+
     string DropType;
 	void Start () {
 
@@ -26,10 +27,11 @@ public class CheckInSystem : MonoBehaviour {
     {
         if (MarkDetail.DistanceCheck())
         {
-            DropType = MarkDetail.MDParentType;
-            Vector3 playerPostion = Player.transform.position;
-            Instantiate(InstantiateType(DropType), new Vector3((playerPostion.x + Random.Range(-20, 20)), playerPostion.y, (playerPostion.z + Random.Range(-20, 20))), Quaternion.identity);
-            MarkDetailCanvas.enabled = false;
+           DropType = MarkDetail.MDParentType;
+           Vector3 playerPostion = Player.transform.position;
+           GameObject InstantiateObject =InstantiateType(DropType);
+           Instantiate(InstantiateObject, new Vector3((playerPostion.x + Random.Range(-20, 20)), playerPostion.y, (playerPostion.z + Random.Range(-20, 20))), Quaternion.identity);
+           MarkDetailCanvas.enabled = false;
         }
 	}
    GameObject InstantiateType(string type)
@@ -79,4 +81,6 @@ public class CheckInSystem : MonoBehaviour {
                return null;
        }
     }
+
+
 }
