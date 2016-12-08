@@ -35,6 +35,7 @@ namespace GoMap
 			
 		public void LoadData (Coordinates currentLocation) {//This is called when the location changes
 
+            
 			if (lastQueryCenter == null || lastQueryCenter.DistanceFromPoint (currentLocation) >= queryRadius/1.5f) { //Do the request only if approaching the limit of the previous one
 				lastQueryCenter = currentLocation;
                 string url = baseUrl + "location=" + currentLocation.latitude + "," + currentLocation.longitude + "&radius=" + queryRadius + "&type=" + type + "&language=ja&sensor=false&key=" + googleAPIkey;
@@ -42,6 +43,13 @@ namespace GoMap
 				StartCoroutine (LoadPlaces(url));
 			}
 		}
+
+        public void ToggleLoadData(double latitude, double longitude)
+        {
+            string url = baseUrl + "location=" + latitude + "," + longitude + "&radius=" + queryRadius + "&type=" + type + "&language=ja&sensor=false&key=" + googleAPIkey;
+            StartCoroutine(LoadPlaces(url));
+
+        }
 
 		public IEnumerator LoadPlaces (string url) { //Request the API
 
