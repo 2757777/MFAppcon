@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class StartSystem : MonoBehaviour {
 
@@ -26,6 +27,7 @@ public class StartSystem : MonoBehaviour {
         {
             NewData.SetActive(true);
         }
+        SceneManager.LoadScene("MainScene", LoadSceneMode.Additive);
     }
 
 	void Start () {
