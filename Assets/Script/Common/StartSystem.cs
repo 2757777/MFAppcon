@@ -27,6 +27,7 @@ public class StartSystem : MonoBehaviour {
         {
             NewData.SetActive(true);
         }
+        PlayerPrefs.GetInt("PlayerNumber", Number);
         SceneManager.LoadScene("MainScene", LoadSceneMode.Additive);
     }
 
@@ -68,8 +69,12 @@ public class StartSystem : MonoBehaviour {
 
     void StartGame()
     {
+        PlayerPrefs.SetInt("PlayerNumber", Number);
         startLoad.ChoosePlayer = player;
         startLoad.SendMessage("SendPlayerStart");
         UnityEngine.SceneManagement.SceneManager.UnloadScene("StartScene");
+        IsHaveDatat = 1;
+        PlayerPrefs.SetInt("haveData", IsHaveDatat);
+
     }
 }
