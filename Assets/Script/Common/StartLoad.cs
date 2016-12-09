@@ -9,7 +9,7 @@ public class StartLoad : MonoBehaviour {
     public GameObject PlayerParent;
     public GameObject MainCamer;
 
-    public Canvas MarkDetail;
+    public Canvas Status;
     public Canvas ToolsPanel;
 	// Use this for initialization
 	void Start () {
@@ -25,7 +25,7 @@ public class StartLoad : MonoBehaviour {
         Player.transform.position = new Vector3(63.21f, 0, 75.56f);
         Player.transform.localScale = new Vector3(1, 1, -1);
 
-        MarkDetail.enabled = true;
+        Status.enabled = true;
         ToolsPanel.enabled = true;
 	}
 }
