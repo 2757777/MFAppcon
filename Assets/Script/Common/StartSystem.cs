@@ -18,16 +18,17 @@ public class StartSystem : MonoBehaviour {
 
     void Awake()
     {
+       //PlayerPrefs.DeleteAll();
        IsHaveDatat = PlayerPrefs.GetInt("haveData");
         Debug.Log(IsHaveDatat);
         if (IsHaveDatat > 0)
         {
             NewData.SetActive(false);
+            Number = PlayerPrefs.GetInt("PlayerNumber");
         }
         else
         {
             NewData.SetActive(true);
-            Number = PlayerPrefs.GetInt("PlayerNumber");
         }
         SceneManager.LoadScene("MainScene", LoadSceneMode.Additive);
     }
