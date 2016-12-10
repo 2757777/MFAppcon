@@ -151,7 +151,6 @@ public class ShowMarkDetail : MonoBehaviour {
     public bool DistanceCheck()
     {
         float dis = Vector3.Distance(Player.transform.position, MDPostion);
-        Debug.Log(dis);
         if (dis < 45)
         {
             LastID = MDID;
