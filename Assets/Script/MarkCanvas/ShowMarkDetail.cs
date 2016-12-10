@@ -127,7 +127,7 @@ public class ShowMarkDetail : MonoBehaviour {
 
 
         //WorkSystem
-        if (Open && StatusBar.EnergyBar.GetComponent<EnergyBar>().valueCurrent > 10 && Types[0] != "park")
+        if (Open && StatusBar.EnergyBar.GetComponent<EnergyBar>().valueCurrent > 10 && Types[0].ToString() != "park")
         {
             WorkButton.interactable = Open;
         }
