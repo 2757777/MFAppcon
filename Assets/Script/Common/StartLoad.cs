@@ -8,9 +8,11 @@ public class StartLoad : MonoBehaviour {
 
     public GameObject PlayerParent;
     public GameObject MainCamer;
+    public GameObject BasePostion;
 
     public Canvas Status;
     public Canvas ToolsPanel;
+    
 	// Use this for initialization
 	void Start () {
 
@@ -22,7 +24,7 @@ public class StartLoad : MonoBehaviour {
         MainCamer.SetActive(true);
         GameObject Player = Instantiate(ChoosePlayer);
         Player.transform.SetParent(PlayerParent.transform);
-        Player.transform.position = new Vector3(63.21f, 0, 75.56f);
+        Player.transform.position = BasePostion.transform.position;
         Player.transform.localScale = new Vector3(1, 1, -1);
 
         Status.enabled = true;
