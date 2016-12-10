@@ -13,6 +13,8 @@ public class TouchObject : MonoBehaviour {
     public GameObject Player;
 
     public Canvas NpcCanvas;
+    public Text SerifText;
+    QuestSystem QuestTyp;
 
     public GameObject NpcCamear;
 	// Use this for initialization
@@ -72,12 +74,9 @@ public class TouchObject : MonoBehaviour {
         float dis = Vector3.Distance(Player.transform.position, TouchObj.transform.position);
         if (dis < 45)
         {
-            NpcCanvas.enabled = true;
-            GameObject npcCamear = Instantiate(NpcCamear);
-            npcCamear.transform.SetParent(TouchObj.transform.parent);
-            npcCamear.transform.localPosition = new Vector3(0, 1.2f, 5);
+            NpcCanvas.GetComponent<NpcCanvasSystem>().TouchNpc(TouchObj);
+            //touchObject false
+            this.enabled = false;
         }
-
-
     }
 }

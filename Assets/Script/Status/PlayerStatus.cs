@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerStatus : MonoBehaviour {
@@ -11,6 +12,7 @@ public class PlayerStatus : MonoBehaviour {
     public string scanCount;
    
     public int HaveMoney;
+    public Text MoneyText;
 	void Start () {
 	
 	}
@@ -28,5 +30,6 @@ public class PlayerStatus : MonoBehaviour {
     public void SaveMoney()
     {
         PlayerPrefs.SetInt(money, HaveMoney);
+        MoneyText.text = "Money:" + HaveMoney;
     }
 }

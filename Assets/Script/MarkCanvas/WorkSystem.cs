@@ -36,7 +36,6 @@ public class WorkSystem : MonoBehaviour {
             StatusBar.EnergyBar.GetComponent<EnergyBar>().valueCurrent -= 10;
             StatusBar.NewDate();
             status.HaveMoney += MarkDetail.WorkPay;
-            MoneyText.text = "Money:" + status.HaveMoney.ToString();
             status.SaveMoney();
             MarkDetailCanvas.enabled = false;
             infor.informationStandby("You got " + MarkDetail.WorkPay);
@@ -44,7 +43,7 @@ public class WorkSystem : MonoBehaviour {
         }
 	}
 
-    void PulsParameter()
+   public void PulsParameter()
     {
         infor.informationStandby("Your parameter up");
         switch (Random.Range(0, 5))
