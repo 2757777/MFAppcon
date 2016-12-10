@@ -23,12 +23,17 @@ public class NpcCanvasSystem : MonoBehaviour {
     public EnergyBar energyBar;
     public StatusBarControl SBC;
     public WorkSystem WS;
+    
+    //距離
+    public GameObject TouchNpcObj;
+    public GameObject PlayerObj;
 	// Use this for initialization
 	void Start () {
 	
 	}
    public void TouchNpc(GameObject TouchObj)
     {
+        TouchNpcObj = TouchObj;
         npcCamear = Instantiate(NpcCamera);
         npcCamear.transform.SetParent(TouchObj.transform.parent);
         npcCamear.transform.localPosition = new Vector3(0, 1.2f, 5);
@@ -70,38 +75,54 @@ public class NpcCanvasSystem : MonoBehaviour {
     }
     void OkButton()
     {
-        switch (NeedType)
+        float dis = Vector3.Distance(PlayerObj.transform.position, TouchNpcObj.transform.position);
+        if (dis < 45)
         {
-            case QuestSystem.NpcNeed.drink:
-                PI.OwnDrink--;
-                PI.SaveItem();
-                break;
-            case QuestSystem.NpcNeed.food:
-                PI.OwnFood--;
-                PI.SaveItem();
-                break;
-            case QuestSystem.NpcNeed.play:
-                energyBar.valueCurrent -= 15;
-                SBC.NewDate();
-                break;
-            case QuestSystem.NpcNeed.sleep:
-                PS.HaveMoney -= 1000;
-                PS.SaveMoney();
-                break;
-            case QuestSystem.NpcNeed.train:
-                PS.HaveMoney -= 1500;
-                PS.SaveMoney();
-                break;
+            switch (NeedType)
+            {
+                case QuestSystem.NpcNeed.drink:
+                    PI.OwnDrink--;
+                    PI.SaveItem();
+                    break;
+                case QuestSystem.NpcNeed.food:
+                    PI.OwnFood--;
+                    PI.SaveItem();
+                    break;
+                case QuestSystem.NpcNeed.play:
+                    energyBar.valueCurrent -= 15;
+                    SBC.NewDate();
+                    break;
+                case QuestSystem.NpcNeed.sleep:
+                    PS.HaveMoney -= 1000;
+                    PS.SaveMoney();
+                    break;
+                case QuestSystem.NpcNeed.train:
+                    PS.HaveMoney -= 1500;
+                    PS.SaveMoney();
+                    break;
+            }
+            WS.PulsParameter();
+            TouchNpcObj.GetComponent<QuestSystem>().TouchQuest();
+            NoButton();
         }
-        WS.PulsParameter();
-        NoButton();
+        else
+        {
+            GameManger.GetComponent<InformationSystem>().informationStandby("You are too far from NPC!");
+            NoButton();
+        }
     }
-    void NoButton()
+   void NoButton()
     {
         touchObject.enabled = true;
         this.GetComponent<Canvas>().enabled = false;
         npcCamear.SetActive(false);
         MenuButton.enabled = true;
     }
+  public void Sofar()
+   {
+       touchObject.enabled = true;
+       this.GetComponent<Canvas>().enabled = false;
+       MenuButton.enabled = true;
+   }
 	
 }

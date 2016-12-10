@@ -18,7 +18,7 @@ public class PlayerItem : MonoBehaviour {
    public void SaveItem()
     {
         PlayerPrefs.SetInt("OwnFood", OwnFood);
-        PlayerPrefs.SetInt("OwnDrink", OwnFood);
+        PlayerPrefs.SetInt("OwnDrink", OwnDrink);
 
         FoodText.text = OwnFood.ToString();
         DrinkText.text = OwnDrink.ToString();

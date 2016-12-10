@@ -12,6 +12,10 @@ public class SceneLoader : MonoBehaviour {
     public Canvas StatusCanvas;
 
     public ShowMarkDetail SMD;
+
+    public InformationSystem infor;
+    public bool HaveKeyWord;
+    public PlayerItem PI;
 	void Start () 
     {
       Button  button = GetComponent<Button>();
@@ -23,6 +27,7 @@ public class SceneLoader : MonoBehaviour {
     {
         if (SMD.DistanceCheck())
         {
+            HaveKeyWord = false;
             MainCamera.SetActive(false);
             MarkDetailCanvas.enabled = false;
             ToolsPanelCanvas.enabled = false;
@@ -31,12 +36,32 @@ public class SceneLoader : MonoBehaviour {
         }
     }
 
-    void BackScene()
+   public void BackScene(bool IsKeyWord)
     {
         MainCamera.SetActive(true);
-        MarkDetailCanvas.enabled = true;
         ToolsPanelCanvas.enabled = true;
         StatusCanvas.enabled = true;
         SceneManager.UnloadScene("ScanCamear");
+        if (IsKeyWord)
+        {
+            if (Random.Range(0, 2) == 0)
+            {
+                //food
+                PI.OwnFood++;
+                PI.SaveItem();
+                infor.informationStandby("You got a food!");
+            }
+            else
+            {
+                //drink
+                PI.OwnDrink++;
+                PI.SaveItem();
+                infor.informationStandby("You got a drink!");
+            }
+        }
+        else
+        {
+            MarkDetailCanvas.enabled = true;
+        }
     }
 }

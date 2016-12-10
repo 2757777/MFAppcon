@@ -36,7 +36,7 @@ public class TreatmentKeyWord : MonoBehaviour
 
         for (int i = 0; i < types.Count; i++)
         {
-            if (KeyWord == types[i])
+            if (KeyWord == types[i] || KeyWord == "food" || KeyWord == "drink")
             {
                 child = KeyWordObject.transform.FindChild("ExclamationMarkImage");
                 child.GetComponent<PushKeyWord>().IsPointKeyWord = true;

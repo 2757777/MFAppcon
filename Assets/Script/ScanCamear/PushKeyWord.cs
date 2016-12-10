@@ -14,6 +14,6 @@ public class PushKeyWord : MonoBehaviour {
     void BackToMain()
     {
         GameObject.Find("CameraPlane").GetComponent<WebCamTextureToCloudVision>().webcamTexture.Stop();
-        GameObject.Find("ScanButton").GetComponent<SceneLoader>().SendMessage("BackScene");
+        GameObject.Find("ScanButton").GetComponent<SceneLoader>().BackScene(IsPointKeyWord);
     }
 }
